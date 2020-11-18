@@ -17,6 +17,7 @@
  * Define Global Variables
  * 
 */
+// let Time = setTimeout(function(){ navBar.style.top = "-30vh"; }, 5000);
 let navBar = document.getElementById("page__header");
 let fragment = document.createDocumentFragment();
 let sections = document.getElementsByTagName("section");
@@ -72,8 +73,22 @@ function scrollActive(){
             }
         }
     }
+    var Time = setTimeout(function(){ navBar.style.top = "-30vh"; }, 5000);
+    var myint = setInterval(stopTimer, 100);
+    function stopTimer() {
+        if (isInViewport(header)) {
+        clearTimeout(Time);
+        clearInterval(myint);
+        return
+        };
+        window.onscroll = function (){
+            clearTimeout(Time);
+            clearInterval(myint);
+        };
+    }
     if (!isInViewport(header)) {
-        setTimeout(function(){ navBar.style.top = "-30vh"; }, 5000);
+        Time;
+        myint;
     }
 }
 // Scroll to anchor ID using scrollTO event
